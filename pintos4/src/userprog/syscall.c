@@ -612,7 +612,13 @@ sys_chdir (const char *udir)
   bool ok = false;
 
   // ADD CODE HERE
+  /*
+	Changes the current working directory of the process to dir, which may be relative or
+absolute. Returns true if successful, false on failure. all of this is done in the file sys call for us??
+   char *temp = copy_in_string(udir);
+   filesys_chdir(temp); --> Change current directory to NAME. Return true if successful, false on failure
 
+	*/
   return ok;
 }
 

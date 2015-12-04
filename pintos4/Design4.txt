@@ -1,5 +1,5 @@
 		           +---------------------------+
-       	           |         CIS 520           |
+       	         	   |         CIS 520           |
 		           | PROJECT 4: File System    |
 		           |     DESIGN DOCUMENT       |
 		           +---------------------------+
@@ -8,9 +8,9 @@
 
 >> Fill in the names of your group members.
 
-FirstName LastName
-FirstName LastName
-FirstName LastName
+Taylor Whittaker
+Doug Anjard
+Ethan Koch
 
 ---- PRELIMINARIES ----
 
@@ -21,6 +21,7 @@ FirstName LastName
 >> preparing your submission, other than the Pintos documentation, course
 >> text, lecture notes, and course staff.
 
+--> Started again with the pintos4 started code provided for us.
 ---- DATA STRUCTURES ----
 
 >> A1: Copy here the declaration of each new or changed `struct' or
