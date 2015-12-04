@@ -21,7 +21,7 @@ Ethan Koch
 >> preparing your submission, other than the Pintos documentation, course
 >> text, lecture notes, and course staff.
 
---> Started again with the pintos4 started code provided for us.
+	--> Started again with the pintos4 started code provided for us.
 ---- DATA STRUCTURES ----
 
 >> A1: Copy here the declaration of each new or changed `struct' or
@@ -30,6 +30,9 @@ Ethan Koch
 
 >> A2: What is the maximum size of a file supported by the inode
 >> structure?  Show your work.
+
+	--> Block sector sizes are fixed at 512 bytes.
+
 
 ---- DIRECTORIES and SUBDIRECTORIES ----
 
