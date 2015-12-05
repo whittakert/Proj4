@@ -56,6 +56,14 @@ Ethan Koch
 >> working directory?  If so, what happens to that process's future
 >> file system operations?  If not, how do you prevent it?
 
+	--> I am not really a 100% sure, but I would assume it doesn't
+	allow a directory to be removed if it is open by another process
+	because we are supposed to verify in dir_remove "that it is not 
+	an in-use or non-empty directory." The look up function Searches 
+	DIR for a file with the given NAME and returns true if one exists, 
+	false otherwise.
+   	On success, sets *INODE to an inode for the file, otherwise to
+   	a null pointer.
 
 			   SURVEY QUESTIONS
 			   ================
