@@ -28,6 +28,10 @@ Ethan Koch
 >> `struct' member, global or static variable, `typedef', or
 >> enumeration.  Identify the purpose of each in 25 words or less.
 
+	--> Again, all variables and structures are provided for us 
+	within the project 4 starter code. 
+
+
 >> A2: What is the maximum size of a file supported by the inode
 >> structure?  Show your work.
 
