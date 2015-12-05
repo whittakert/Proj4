@@ -615,10 +615,11 @@ sys_chdir (const char *udir)
   /*
 	Changes the current working directory of the process to dir, which may be relative or
 absolute. Returns true if successful, false on failure. all of this is done in the file sys call for us??
+   */
    char *temp = copy_in_string(udir);
-   filesys_chdir(temp); --> Change current directory to NAME. Return true if successful, false on failure
+   ok = filesys_chdir(temp); //Change current directory to NAME. Return true if successful, false on failure
 
-	*/
+	
   return ok;
 }
 
@@ -653,13 +654,29 @@ sys_isdir (int handle)
   return fd->dir != NULL;
 }
 
-/* Inumber system call. */
+/* Inumber system call. 
+
+Returns the inode number of the inode associated with fd, which may represent an ordinary
+file or a directory. [Extend to also work for directories]. Hint: the function file_get_inode()
+returns the inode number associated with a given file, and the function dir_get_inode()
+returns the inode number associated with a directory. An inode number persistently
+identifies a file or directory. It is unique during the file's existence. In Pintos, the sector
+number of the inode is suitable for use as an inode number.
+
+*/
 static int
 sys_inumber (int handle)
 {
 
   // ADD AND MODIFY CODE HERE - call dir_get_inode() for directories
-
+/* supposed to use dir_get_inode but 
+  if (sys_isdir(handle) // Returns true if fd represents a directory, false if it represents an ordinary file.. check to see if this is a directory of a file
+  {
+     struct file_descriptor *temp = lookup_fd (handle);
+     struct inode *inode = dir_get_inode (temp);
+     return inode_get_inumber (inode);
+  }
+*/
   struct file_descriptor *fd = lookup_fd (handle);
   struct inode *inode = file_get_inode (fd->file);
   return inode_get_inumber (inode);
