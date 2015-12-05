@@ -31,7 +31,13 @@ Ethan Koch
 >> A2: What is the maximum size of a file supported by the inode
 >> structure?  Show your work.
 
-	--> Block sector sizes are fixed at 512 bytes.
+	--> From the proj4 pdf we are told block sector sizes are fixed at 512 bytes.  
+	In inode.c we see that the max size for the inode is 125
+	#define DIRECT_CNT 123
+	#define INDIRECT_CNT 1
+	#define DBL_INDIRECT_CNT 1
+	#define SECTOR_CNT (DIRECT_CNT + INDIRECT_CNT + DBL_INDIRECT_CNT)
+	512 * 125 = 64K bytes
 
 
 ---- DIRECTORIES and SUBDIRECTORIES ----
