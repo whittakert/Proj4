@@ -253,7 +253,7 @@ sys_create (const char *ufile, unsigned initial_size)
  
 /* Remove system call. */
 static int
-sys_remove (const char *ufile) 
+sys_remove (const char *ufile)
 {
   char *kfile = copy_in_string (ufile);
   bool ok = filesys_remove (kfile);
@@ -261,10 +261,10 @@ sys_remove (const char *ufile)
  
   return ok;
 }
-
+
 /* A file descriptor, for binding a file handle to a file. */
 struct file_descriptor
-  {
+	{
     struct list_elem elem;      /* List element. */
     struct file *file;          /* File. */
     struct dir *dir;            /* Directory. */
@@ -506,7 +506,7 @@ sys_close (int handle)
   free (fd);
   return 0;
 }
-
+
 /* Binds a mapping id to a region of memory and a file. */
 struct mapping
   {
@@ -609,16 +609,13 @@ sys_munmap (int mapping)
 static int
 sys_chdir (const char *udir) 
 {
-  bool ok = false;
-
   // ADD CODE HERE
-  /*
-	Changes the current working directory of the process to dir, which may be relative or
-absolute. Returns true if successful, false on failure. all of this is done in the file sys call for us??
-   */
-   char *temp = copy_in_string(udir);
-   ok = filesys_chdir(temp); //Change current directory to NAME. Return true if successful, false on failure
+	/* Changes the current working directory of the process to dir, which may be relative or
+	absolute. Returns true if successful, false on failure. all of this is done in the file sys call for us. */
 
+  char *kdir = copy_in_string(udir);
+  bool ok = filesys_chdir(kdir); //Change current directory to NAME. Return true if successful, false on failure
+  palloc_free_page (kdir);
 	
   return ok;
 }
@@ -655,33 +652,28 @@ sys_isdir (int handle)
 }
 
 /* Inumber system call. 
-
 Returns the inode number of the inode associated with fd, which may represent an ordinary
 file or a directory. [Extend to also work for directories]. Hint: the function file_get_inode()
 returns the inode number associated with a given file, and the function dir_get_inode()
 returns the inode number associated with a directory. An inode number persistently
 identifies a file or directory. It is unique during the file's existence. In Pintos, the sector
 number of the inode is suitable for use as an inode number.
-
 */
+
 static int
 sys_inumber (int handle)
 {
-
   // ADD AND MODIFY CODE HERE - call dir_get_inode() for directories
-/* supposed to use dir_get_inode but 
-  if (sys_isdir(handle) // Returns true if fd represents a directory, false if it represents an ordinary file.. check to see if this is a directory of a file
-  {
-     struct file_descriptor *temp = lookup_fd (handle);
-     struct inode *inode = dir_get_inode (temp);
-     return inode_get_inumber (inode);
-  }
-*/
-  struct file_descriptor *fd = lookup_fd (handle);
-  struct inode *inode = file_get_inode (fd->file);
+	struct file_descriptor *fd = lookup_fd (handle);
+	struct inode *inode;
+
+	// Returns true if fd represents a directory, false if it represents an ordinary file.. check to see if this is a directory of a file
+  if (sys_isdir(handle)) inode = dir_get_inode (fd->dir);
+	else inode = file_get_inode (fd->file);
+
   return inode_get_inumber (inode);
 }
- 
+
 /* On thread exit, close all open files and unmap all mappings. */
 void
 syscall_exit (void) 
