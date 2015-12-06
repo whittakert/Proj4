@@ -237,15 +237,7 @@ dir_remove (struct dir *dir, const char *name)
   if (inode == NULL)
     goto done;
 
-  /* Verify that it is not an in-use or non-empty directory. 
-  To check to see if the node is not in use. stolen from dir_add
-  
-
-  inode_lock (dir->inode);
-  if (lookup (dir, name, NULL, NULL))
-    goto done;
-
-  */
+  /* Verify that it is not an in-use or non-empty directory. */
 
   // ADD CODE HERE
   if(inode_get_type(inode) == DIR_INODE)
