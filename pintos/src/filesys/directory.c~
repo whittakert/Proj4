@@ -248,24 +248,6 @@ dir_remove (struct dir *dir, const char *name)
   */
 
   // ADD CODE HERE
-  if(inode_get_type(inode) == DIR_INODE)
-  {
-    if(inode_open_cnt(inode) > 1)
-      goto done;
-
-    struct dir_entry ent;
-    off_t offset;
-    int use_cnt = 0;
-
-    for(offset = 0; inode_read_at(inode, &ent, sizeof ent, offset); offset += sizeof ent)
-    {
-      if(ent.in_use)
-	use_cnt++;
-    }
-
-    if(use_cnt > 2)
-      goto done;
-  }
 
   /* Erase directory entry. */
   e.in_use = false;
